@@ -1,4 +1,4 @@
-The purpose of this repository is to do the following:
+The purpose of this repository is to accomplish the following:
 
 - [ ] Learn more about FastAPI by spinning up a demo app.
 - [ ] Instrument the demoapp with the New Relic platform.
