@@ -6,7 +6,7 @@
             - [ ] **C**reate (post)
             - [ ] **R**ead   (get)
             - [ ] **U**pdate (put)
-            - [ ] **D**elete (delete)
+            - [ ] **D**elete (delete) 
 - [ ] Instrument the demo app with the New Relic platform.
 - [ ] Explain the purpose of the FastAPI demo app .
 - [ ] Explain the meaning of instrumenting one app with another app.
