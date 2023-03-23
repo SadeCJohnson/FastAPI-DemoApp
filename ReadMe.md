@@ -18,7 +18,7 @@
 - Installed fastapi in the Terminal via `pip3 install fastapi`.
 
 
-## Issues encountered and resolution
+## Issues encountered and a resolution
 - fastapi not being recognized in the editor. 
     - Resolved this by:
     1. Opening the command palette via the (`Ctrl` + `Shift` + `P`) command
