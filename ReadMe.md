@@ -1,7 +1,7 @@
 # The purpose of this repository is to accomplish the following:
 
 - [x] Learn more about FastAPI by spinning up a simple demo app.
-    - [ ]Created a starter app, but the next step is to spin up an interactive demo app.
+    - [ ] Created a starter app, but the next step is to spin up an interactive demo app.
 - [ ] Instrument the demoapp with the New Relic platform.
 - [ ] Explain the purpose of the FastAPI demo app .
 - [ ] Explain the meaning of instrumenting one app with another app.
