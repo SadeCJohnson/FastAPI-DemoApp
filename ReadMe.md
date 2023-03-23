@@ -3,10 +3,10 @@
 - [x] Learn more about FastAPI by spinning up a simple demo app.
     - [ ] Created a starter app, but the next step is to spin up an interactive demo app.
          - Create an endpoint that allows the user to perform the basic CRUD operations
-            - [ ] **C**reate
-            - [ ] **R**ead
-            - [ ] **U**pdate
-            - [ ] **D**elete
+            - [ ] **C**reate (post)
+            - [ ] **R**ead   (get)
+            - [ ] **U**pdate (put)
+            - [ ] **D**elete (delete)
 - [ ] Instrument the demo app with the New Relic platform.
 - [ ] Explain the purpose of the FastAPI demo app .
 - [ ] Explain the meaning of instrumenting one app with another app.
