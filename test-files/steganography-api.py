@@ -1,9 +1,12 @@
 import base64 #base64 uses 64 possible values for representing binary data (https://levelup.gitconnected.com/an-introduction-to-base64-encoding-716cdccc58ce)
-
+from fastapi import FastAPI
 ENDOFMESSAGE = "0100100101010101010101100100111101010010010001010011100101000111010101000101010101010110010101000101010100110000010001100100100001010010010100110100010100111101"
+
+app = FastAPI()
 
 #This code is from the exercise found here: https://docs.replit.com/tutorials/python/steganography
 
+@app.get("/encodeMessage")
 def encode_message_as_bytestring(message):
     b64 = message.encode("utf8") #Unicode Transformation Format - 8 bits (UTF-8) encodes the characters as ASCII text aka in human readable / natural form
     print(b64) #this prints the human readable message that was passed in the exact form that it was passed in as a parameter
