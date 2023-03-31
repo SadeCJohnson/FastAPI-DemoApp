@@ -14,3 +14,13 @@ def encode_message_as_bytestring(message):
 
 encode_message_as_bytestring("Sade")
 encode_message_as_bytestring("sade")
+
+#Line 15 returns the following output
+#b'Sade'
+#b'U2FkZQ==\n'
+#010101010011001001000110011010110101101001010001001111010011110100001010
+
+#Line 16 returns a slightly different output:
+#b'sade'
+#b'c2FkZQ==\n'
+#011000110011001001000110011010110101101001010001001111010011110100001010
