@@ -5,30 +5,18 @@ ENDOFMESSAGE = "0100100101010101010101100100111101010010010001010011100101000111
 app = FastAPI()
 
 #This code is from the exercise found here: https://docs.replit.com/tutorials/python/steganography
-
-@app.get("/encodeMessage")
-def encode_message_as_bytestring(message):
+#Will need to use a Query parameter to pass in value or else a 422 Unprocessable Entity error will be returned
+@app.get("/encodeMessage") 
+def encode_message_as_bytestring(message): #Query param format: ?message="<Insert-String-Here"
     b64 = message.encode("utf8") #Unicode Transformation Format - 8 bits (UTF-8) encodes the characters as ASCII text aka in human readable / natural form
-    print(b64) #this prints the human readable message that was passed in the exact form that it was passed in as a parameter
     bytes_ = base64.encodebytes(b64) #encodes the message using base64 encoded data into the binary form
-    print(bytes_) #prints the transformation into binary form
     bytestring = "".join(["{:08b}".format(x) for x in bytes_]) #Tranformation of the binary form into a sequence of bytes (which allows the data to be stored in a computer)
-    print(bytestring)
     return bytestring
 
 
-encode_message_as_bytestring("Sade")
-encode_message_as_bytestring("sade")
+# ***************INPUT******************
+# http://127.0.0.1:8000/encodeMessage?message=%22Sade%22
 
 
 #  ***************OUTPUT****************
-#Line 15 returns the following output
-#b'Sade'
-#b'U2FkZQ==\n'
-#010101010011001001000110011010110101101001010001001111010011110100001010
-
-#Line 16 returns a slightly different output:
-#b'sade'
-#b'c2FkZQ==\n'
-#011000110011001001000110011010110101101001010001001111010011110100001010
-
+# "010010010110110001001110011010000101101001000111010101010110100100001010"
