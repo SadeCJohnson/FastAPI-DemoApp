@@ -15,6 +15,8 @@ def encode_message_as_bytestring(message):
 encode_message_as_bytestring("Sade")
 encode_message_as_bytestring("sade")
 
+
+#  ***************OUTPUT****************
 #Line 15 returns the following output
 #b'Sade'
 #b'U2FkZQ==\n'
