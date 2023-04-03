@@ -15,8 +15,10 @@ def encode_message_as_bytestring(message):
     return bytestring
 
 #TEST 1: THE ENCODE FUNCTION
+print("Testing the function that returns the metadata of an image:\n ")
 encode_message_as_bytestring("Sade")
 encode_message_as_bytestring("sade")
+print("____________________________________________________________")
 
 
 #retrieves pixels from an image
@@ -32,10 +34,12 @@ def get_pixels_from_image(imageFilename):
     print("Additional Metadata of the image is: " )
     print(image[3])
    # print(type(image))
-    return pixels
+    return image
 
 #TEST 2: PIXEL RETRIEVAL FROM AN IMAGE amongst other information
+print("Testing the function that returns the metadata of an image:\n ")
 get_pixels_from_image("images/scj-avatar.png")
+print("____________________________________________________________")
 
 #retrieves the pixels and bytestring of our original message and combines them
 def encode_pixels_with_message(pixels, bytestring):
@@ -85,18 +89,18 @@ def decode_pixels(pixels):
 
 
 #  ***************OUTPUT 1****************
-#Line 18 returns the following output
+#Line 19 returns the following output
 #b'Sade'
 #b'U2FkZQ==\n'
 #010101010011001001000110011010110101101001010001001111010011110100001010
 
-#Line 19 returns a slightly different output:
+#Line 20 returns a slightly different output:
 #b'sade'
 #b'c2FkZQ==\n'
 #011000110011001001000110011010110101101001010001001111010011110100001010
 
 #  ***************OUTPUT 2****************
-#Line 38 returns the following output
+#Line 41 returns the following output
 #The width of the image is: 
 #368
 #The height of the image is: 
