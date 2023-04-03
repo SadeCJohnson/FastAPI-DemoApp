@@ -14,7 +14,7 @@ def encode_message_as_bytestring(message):
     print(bytestring)
     return bytestring
 
-
+#TEST 1: THE ENCODE FUNCTION
 encode_message_as_bytestring("Sade")
 encode_message_as_bytestring("sade")
 
@@ -23,10 +23,68 @@ encode_message_as_bytestring("sade")
 def get_pixels_from_image(imageFilename):
     image = png.Reader(imageFilename).read()
     pixels = image[2]
+    print("The width of the image is: " )
+    print(image[0])
+    print("The height of the image is: " )
+    print(image[1])
+    print("The rows (pixels) of the image are: " )
+    print(image[2])
+    print("Additional Metadata of the image is: " )
+    print(image[3])
+   # print(type(image))
     return pixels
 
+#TEST 2: PIXEL RETRIEVAL FROM AN IMAGE amongst other information
+get_pixels_from_image("images/scj-avatar.png")
 
-#  ***************OUTPUT****************
+#retrieves the pixels and bytestring of our original message and combines them
+def encode_pixels_with_message(pixels, bytestring):
+    '''modifies pixels to encode the contents from bytestring'''
+
+    enc_pixels = []
+    string_i = 0
+    for row in pixels:
+        enc_row = []
+        for i, char in enumerate(row):
+            if string_i >= len(bytestring):
+                pixel = row[i]
+            else:
+                if row[i] % 2 != int(bytestring[string_i]):
+                    if row[i] == 0:
+                        pixel = 1
+                    else:
+                        pixel = row[i] - 1
+                else:
+                    pixel = row[i]
+            enc_row.append(pixel)
+            string_i += 1
+
+        enc_pixels.append(enc_row)
+    return enc_pixels
+
+#converts the pixels (with the image data and the encoded message) back into a PNG image
+def write_pixels_to_image(pixels, imageFilename):
+    png.from_array(pixels, 'RGB').save(imageFilename)
+
+#converts a binary string back into human readable text
+def decode_message_from_bytestring(bytestring):
+    bytestring = bytestring.split(ENDOFMESSAGE)[0]
+    message = int(bytestring, 2).to_bytes(len(bytestring) // 8, byteorder='big')
+    message = base64.decodebytes(message).decode("utf8")
+    return message
+
+#extracts the bytestring from an image
+def decode_pixels(pixels):
+    bytestring = []
+    for row in pixels:
+        for c in row:
+            bytestring.append(str(c % 2))
+    bytestring = ''.join(bytestring)
+    message = decode_message_from_bytestring(bytestring)
+    return message
+
+
+#  ***************OUTPUT 1****************
 #Line 18 returns the following output
 #b'Sade'
 #b'U2FkZQ==\n'
@@ -37,3 +95,13 @@ def get_pixels_from_image(imageFilename):
 #b'c2FkZQ==\n'
 #011000110011001001000110011010110101101001010001001111010011110100001010
 
+#  ***************OUTPUT 2****************
+#Line 38 returns the following output
+#The width of the image is: 
+#368
+#The height of the image is: 
+#357
+#The rows (pixels) of the image are: 
+#<generator object Reader._iter_bytes_to_values at 0x10b16c580>
+#Additional Metadata of the image is: 
+#{'greyscale': False, 'alpha': True, 'planes': 4, 'bitdepth': 8, 'interlace': 0, 'size': (368, 357)}
