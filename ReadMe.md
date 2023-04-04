@@ -32,7 +32,7 @@
 ~~- After exiting the uvicorn web server and closing the app in the browser, I changed the contents of the file and tried to reload the server. Unfortunately, I ran into the `No Module named uvicorn found` which could possibly be due to a deeper installation issue (initial speculation). I discovered this by running the `pip3 list` command in the terminal and didn't see either **fastapi** or **uvicorn** modules installed. *Will need to be resolved later.*~~
 - **Issue 2:** When trying to `import png` into the the `steganography.py` file, the `Import "png" could not be resolve Pylance(reportMissingImports)` warning message was returned
     - **Resolve:**
-    1. Searched for the error message and found a resolve on [stackOverflow](https://stackoverflow.com/questions/31142919/how-to-install-the-png-module-in-python) which instructed to do the following:
-         a. Run `pip3 install pypng`
-         b. The `import png` line of code should work
+        - Searched for the error message and found a resolve on [stackOverflow](https://stackoverflow.com/questions/31142919/how-to-install-the-png-module-in-python) which instructed to do the following:
+            - Run `pip3 install pypng`
+            - The `import png` line of code should work
 
