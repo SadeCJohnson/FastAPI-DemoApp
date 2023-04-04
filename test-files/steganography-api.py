@@ -25,11 +25,14 @@ def displayImage():
 
 #retrieves pixels from an image
 #TODO: Need to retrieve the image pixels and show this in the browser
-@app.get("/imagePixels")
 def get_pixels_from_image(imageFilename):
     image = png.Reader(imageFilename).read() #The read() method returns a 4-tuple consisting of the width, height, rows (pixels), and additional metadata
     pixels = image[2]
     return pixels
+
+@app.get("/imagePixels")
+def retrieve_pixels_from_image(imageFilename):
+    return (get_pixels_from_image("images/scj-avatar.png"))
 
 # ***************INPUT 1******************
 # http://127.0.0.1:8000/encodeMessage?message=%22Sade%22

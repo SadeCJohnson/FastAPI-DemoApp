@@ -33,6 +33,6 @@
 - **Issue 2:** When trying to `import png` into the the `steganography.py` file, the `Import "png" could not be resolve Pylance(reportMissingImports)` warning message was returned
     - **Resolve:**
         1. Searched for the error message and found a resolve on [stackOverflow](https://stackoverflow.com/questions/31142919/how-to-install-the-png-module-in-python) which instructed to do the following:
-            a. Run `pip3 install pypng`
-            b. The `import png` line of code should work
+                a. Run `pip3 install pypng`
+                b. The `import png` line of code should work
 
