@@ -5,7 +5,7 @@ ENDOFMESSAGE = "0100100101010101010101100100111101010010010001010011100101000111
 
 #This code is from the exercise found here: https://docs.replit.com/tutorials/python/steganography
 #Encodes a specified message into a bytestring
-def encode_message_as_bytestring(message):
+def encode_message_as_bytestring(message): #TESTED
     b64 = message.encode("utf8") #Unicode Transformation Format - 8 bits (UTF-8) encodes the characters as ASCII text aka in human readable / natural form
     print(b64) #this prints the human readable message that was passed in the exact form that it was passed in as a parameter
     bytes_ = base64.encodebytes(b64) #encodes the message using base64 encoded data into the binary form
@@ -14,15 +14,9 @@ def encode_message_as_bytestring(message):
     print(bytestring)
     return bytestring
 
-#TEST 1: THE ENCODE FUNCTION
-print("Testing the function that returns the metadata of an image:\n ")
-encode_message_as_bytestring("Sade")
-encode_message_as_bytestring("sade")
-print("____________________________________________________________")
-
 
 #retrieves pixels from an image
-def get_pixels_from_image(imageFilename):
+def get_pixels_from_image(imageFilename): #TESTED
     image = png.Reader(imageFilename).read() #The read() method returns a 4-tuple consisting of the width, height, rows (pixels), and additional metadata
     pixels = image[2]
     print("The width of the image is: " )
@@ -34,12 +28,8 @@ def get_pixels_from_image(imageFilename):
     print("Additional Metadata of the image is: " )
     print(image[3])
    # print(type(image))
-    return image
+    return pixels
 
-#TEST 2: PIXEL RETRIEVAL FROM AN IMAGE amongst other information
-print("Testing the function that returns the metadata of an image:\n ")
-get_pixels_from_image("images/scj-avatar.png")
-print("____________________________________________________________")
 
 #retrieves the pixels and bytestring of our original message and combines them
 def encode_pixels_with_message(pixels, bytestring):
@@ -71,7 +61,7 @@ def write_pixels_to_image(pixels, imageFilename):
     png.from_array(pixels, 'RGB').save(imageFilename)
 
 #converts a binary string back into human readable text
-def decode_message_from_bytestring(bytestring):
+def decode_message_from_bytestring(bytestring): #TESTED
     bytestring = bytestring.split(ENDOFMESSAGE)[0]
     message = int(bytestring, 2).to_bytes(len(bytestring) // 8, byteorder='big')
     message = base64.decodebytes(message).decode("utf8")
@@ -88,19 +78,38 @@ def decode_pixels(pixels):
     return message
 
 
-#  ***************OUTPUT 1****************
-#Line 19 returns the following output
+#TEST 1: THE ENCODE FUNCTION
+print("Testing the function that returns the metadata of an image:\n ")
+encode_message_as_bytestring("Sade")
+encode_message_as_bytestring("sade")
+print("____________________________________________________________")
+
+#TEST 2: PIXEL RETRIEVAL FROM AN IMAGE amongst other information
+print("Testing the function that returns the metadata of an image:\n ")
+get_pixels_from_image("images/scj-avatar.png")
+print("____________________________________________________________")
+
+#TEST 3: Tests the Decode function to see that the bytestring is returning the correct human readable string
+print("Testing the function that decodes a given bytestring into human readable text:\n ")
+print(decode_message_from_bytestring("010101010011001001000110011010110101101001010001001111010011110100001010"))
+print(decode_message_from_bytestring("011000110011001001000110011010110101101001010001001111010011110100001010"))
+
+
+ 
+
+#  ***************OUTPUT FOR TEST 1****************
+#The first test for the encode_message_as_bytestring(...) function returns the following output:
 #b'Sade'
 #b'U2FkZQ==\n'
 #010101010011001001000110011010110101101001010001001111010011110100001010
 
-#Line 20 returns a slightly different output:
+#The second test for the encode_message_as_bytestring(...) function returns a slightly different output:
 #b'sade'
 #b'c2FkZQ==\n'
 #011000110011001001000110011010110101101001010001001111010011110100001010
 
-#  ***************OUTPUT 2****************
-#Line 41 returns the following output
+#  ***************OUTPUT FOR TEST 2****************
+#The test of the get_pixels_from_image(...) function returns the following output
 #The width of the image is: 
 #368
 #The height of the image is: 
@@ -109,3 +118,11 @@ def decode_pixels(pixels):
 #<generator object Reader._iter_bytes_to_values at 0x10b16c580>
 #Additional Metadata of the image is: 
 #{'greyscale': False, 'alpha': True, 'planes': 4, 'bitdepth': 8, 'interlace': 0, 'size': (368, 357)}
+
+
+#  ***************OUTPUT FOR TEST 3****************
+# The test for the decode_message_from_bytestring(...) functions returns the following:
+# Testing the function that decodes a given bytestring into human readable text:
+# Sade
+# sade
+
