@@ -1,5 +1,8 @@
 import base64 #base64 uses 64 possible values for representing binary data (https://levelup.gitconnected.com/an-introduction-to-base64-encoding-716cdccc58ce)
 from fastapi import FastAPI
+from fastapi.responses import FileResponse
+import png
+
 ENDOFMESSAGE = "0100100101010101010101100100111101010010010001010011100101000111010101000101010101010110010101000101010100110000010001100100100001010010010100110100010100111101"
 
 app = FastAPI()
@@ -14,9 +17,16 @@ def encode_message_as_bytestring(message): #Query param format: ?message="<Inser
     return bytestring
 
 
-# ***************INPUT******************
+#returns a provided image that'll serve as the use case for this steganography project
+#Source: https://stackoverflow.com/questions/55873174/how-do-i-return-an-image-in-fastapi
+@app.get("/displayImage")
+def displayImage():
+    return FileResponse("images/scj-avatar.png")
+
+
+# ***************INPUT 1******************
 # http://127.0.0.1:8000/encodeMessage?message=%22Sade%22
 
 
-#  ***************OUTPUT****************
+#  ***************OUTPUT 1****************
 # "010010010110110001001110011010000101101001000111010101010110100100001010"
