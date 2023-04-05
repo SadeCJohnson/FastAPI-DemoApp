@@ -32,7 +32,7 @@ def get_pixels_from_image(imageFilename): #TESTED
 
 
 #retrieves the pixels and bytestring of our original message and combines them
-def encode_pixels_with_message(pixels, bytestring):
+def encode_pixels_with_message(pixels, bytestring): #TODO: TEST
     '''modifies pixels to encode the contents from bytestring'''
 
     enc_pixels = []
@@ -57,7 +57,7 @@ def encode_pixels_with_message(pixels, bytestring):
     return enc_pixels
 
 #converts the pixels (with the image data and the encoded message) back into a PNG image
-def write_pixels_to_image(pixels, imageFilename):
+def write_pixels_to_image(pixels, imageFilename): #TODO: TEST
     png.from_array(pixels, 'RGB').save(imageFilename)
 
 #converts a binary string back into human readable text
@@ -68,7 +68,7 @@ def decode_message_from_bytestring(bytestring): #TESTED
     return message
 
 #extracts the bytestring from an image
-def decode_pixels(pixels):
+def decode_pixels(pixels): #TODO: TEST
     bytestring = []
     for row in pixels:
         for c in row:
@@ -77,52 +77,4 @@ def decode_pixels(pixels):
     message = decode_message_from_bytestring(bytestring)
     return message
 
-
-#TEST 1: THE ENCODE FUNCTION
-print("Testing the function that returns the metadata of an image:\n ")
-encode_message_as_bytestring("Sade")
-encode_message_as_bytestring("sade")
-print("____________________________________________________________")
-
-#TEST 2: PIXEL RETRIEVAL FROM AN IMAGE amongst other information
-print("Testing the function that returns the metadata of an image:\n ")
-get_pixels_from_image("images/scj-avatar.png")
-print("____________________________________________________________")
-
-#TEST 3: Tests the Decode function to see that the bytestring is returning the correct human readable string
-print("Testing the function that decodes a given bytestring into human readable text:\n ")
-print(decode_message_from_bytestring("010101010011001001000110011010110101101001010001001111010011110100001010"))
-print(decode_message_from_bytestring("011000110011001001000110011010110101101001010001001111010011110100001010"))
-
-
- 
-
-#  ***************OUTPUT FOR TEST 1****************
-#The first test for the encode_message_as_bytestring(...) function returns the following output:
-#b'Sade'
-#b'U2FkZQ==\n'
-#010101010011001001000110011010110101101001010001001111010011110100001010
-
-#The second test for the encode_message_as_bytestring(...) function returns a slightly different output:
-#b'sade'
-#b'c2FkZQ==\n'
-#011000110011001001000110011010110101101001010001001111010011110100001010
-
-#  ***************OUTPUT FOR TEST 2****************
-#The test of the get_pixels_from_image(...) function returns the following output
-#The width of the image is: 
-#368
-#The height of the image is: 
-#357
-#The rows (pixels) of the image are: 
-#<generator object Reader._iter_bytes_to_values at 0x10b16c580>
-#Additional Metadata of the image is: 
-#{'greyscale': False, 'alpha': True, 'planes': 4, 'bitdepth': 8, 'interlace': 0, 'size': (368, 357)}
-
-
-#  ***************OUTPUT FOR TEST 3****************
-# The test for the decode_message_from_bytestring(...) functions returns the following:
-# Testing the function that decodes a given bytestring into human readable text:
-# Sade
-# sade
 
