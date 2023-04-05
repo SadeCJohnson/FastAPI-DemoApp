@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from fastapi.responses import FileResponse
 import png
 import json
+from PIL import Image 
 
 ENDOFMESSAGE = "0100100101010101010101100100111101010010010001010011100101000111010101000101010101010110010101000101010100110000010001100100100001010010010100110100010100111101"
 
@@ -32,32 +33,35 @@ def displayImage():
     return FileResponse("images/scj-avatar.png")
 
 
-#retrieves pixels from an image
-#TODO: Need to retrieve the image pixels and show this in the browser
-#def get_pixels_from_image(imageFilename):
- #   pixels = image[2]
- #   return pixels
+@program.get("/imagePixels")
+def retrieve_pixels_from_image():
+    #image = Image.open("/Users/sjohnson/Desktop/techie-projects/FastAPI-DemoApp/program-files/images/scj-avatar.png")
+    #pixels = list(image.getdata())
+    #return pixels
 
-@program.get("/imagePixels") #doesn't work
-def imageReader():
-    png.Reader("scj-avatar.png").read() #The read() method returns a 4-tuple consisting of the width, height, rows (pixels), and additional metadata
+    image = Image.open("/Users/sjohnson/Desktop/techie-projects/FastAPI-DemoApp/program-files/images/scj-avatar.png")
+    
+    #resize image for ease
+    new_size = (100,100)
+    resized_image = image.resize(new_size)
+    resized_image.save("newimage.png")
+    pixels = list(resized_image.getdata())
+    
+    print(pixels)
+    return pixels
 
-#TODO: Need to fix this function because it doesn't work as expected :/ 
-#create a dictionary that stores the meta data of the image
-#    imageMetadata = {
-#        "width": image[0],
-#        "height": image[1],
-#        "rows": image[2],
-#        "additional-details": image[3]
-#    }
-
-#    return json.dumps(imageMetadata)
-
-#print(imageReader())
-
-#def retrieve_pixels_from_image():
-    #return get_pixels_from_image("images/scj-avatar.png")
- #   return json.dumps(imageMetadata)
+@program.get("/displayResizedImage")
+def retrieve_resized_image():
+    image = Image.open("/Users/sjohnson/Desktop/techie-projects/FastAPI-DemoApp/program-files/images/scj-avatar.png")
+    
+    #resize image for ease
+    new_size = (100,100)
+    resized_image = image.resize(new_size)
+    resized_image.save("images/scj-avatar-resized.png")
+    #pixels = list(resized_image.getdata())
+    
+    #print(pixels)
+    return FileResponse("images/scj-avatar-resized.png")
 
 # ***************INPUT 1******************
 # http://127.0.0.1:8000/encodeMessage?message=%22Sade%22
