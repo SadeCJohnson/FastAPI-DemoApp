@@ -29,11 +29,11 @@ def decode_message_from_bytestring(bytestring):
 #returns a provided image that'll serve as the use case for this steganography project
 #Source: https://stackoverflow.com/questions/55873174/how-do-i-return-an-image-in-fastapi
 @program.get("/displayImage")
-def displayImage():
+def displays_the_original_image():
     return FileResponse("images/scj-avatar.png")
 
 
-@program.get("/imagePixels")
+@program.get("/retrieveImagePixels")
 def retrieve_pixels_from_image():
     #image = Image.open("/Users/sjohnson/Desktop/techie-projects/FastAPI-DemoApp/program-files/images/scj-avatar.png")
     #pixels = list(image.getdata())
@@ -63,6 +63,14 @@ def retrieve_resized_image():
     #print(pixels)
     return FileResponse("images/scj-avatar-resized.png")
 
+@program.get("/displaySteganographicImage")
+def display_Steganographic_Image():
+    return "Endpoint Under Construction - COMING SOON"
+
+
+@program.get("/displaySteganographicImage-2")
+def displaySteganographicImage():
+    return "Improper format"
 # ***************INPUT 1******************
 # http://127.0.0.1:8000/encodeMessage?message=%22Sade%22
 

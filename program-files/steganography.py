@@ -16,7 +16,7 @@ def encode_message_as_bytestring(message): #TESTED
 
 
 #retrieves pixels from an image
-def get_pixels_from_image(imageFilename): #TESTED
+def get_pixels_from_image(imageFilename): #deprecated this function
     image = png.Reader(imageFilename).read() #The read() method returns a 4-tuple consisting of the width, height, rows (pixels), and additional metadata
     pixels = image[2]
     print("The width of the image is: " )
