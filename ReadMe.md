@@ -3,15 +3,15 @@
 - [x] Learn more about FastAPI by spinning up a simple demo app.
     - [ ] Created a starter app, but the next step is to spin up an interactive demo app.
          - Create an endpoint that allows the user to perform the basic CRUD operations
-            - [ ] **C**reate (post)
+            - [x] **C**reate (post) 
             - [ ] **R**ead   (get)
             - [ ] **U**pdate (put)
             - [ ] **D**elete (delete) 
 - [ ] Instrument the demo app with the New Relic platform.
-- [ ] Explain the purpose of the FastAPI demo app .
+- [x] Explain the purpose of the FastAPI demo app .
 - [ ] Explain the meaning of instrumenting one app with another app.
 - [ ] Describe how the demo app was successfully instrumented with the New Relic platform.
-- [ ] What was learned throughout the process.
+- [x] What was learned throughout the process.
 
 
 
@@ -36,3 +36,7 @@
             - Run `pip3 install pypng`
             - The `import png` line of code should work
 
+
+## Future Implementation (TODOs):
+- Expand upon the CRUD operations in the **purpose** section
+- Fix distorted image that's being generated in the steganographic step 

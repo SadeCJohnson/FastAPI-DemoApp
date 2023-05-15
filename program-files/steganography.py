@@ -1,5 +1,6 @@
 import base64 #base64 uses 64 possible values for representing binary data (https://levelup.gitconnected.com/an-introduction-to-base64-encoding-716cdccc58ce)
 import png
+from PIL import Image 
 
 ENDOFMESSAGE = "0100100101010101010101100100111101010010010001010011100101000111010101000101010101010110010101000101010100110000010001100100100001010010010100110100010100111101"
 
@@ -31,6 +32,9 @@ def get_pixels_from_image(imageFilename): #deprecated this function
     return pixels
 
 
+
+
+
 #retrieves the pixels and bytestring of our original message and combines them
 def encode_pixels_with_message(pixels, bytestring): #TODO: TEST
     '''modifies pixels to encode the contents from bytestring'''
@@ -57,8 +61,15 @@ def encode_pixels_with_message(pixels, bytestring): #TODO: TEST
     return enc_pixels
 
 #converts the pixels (with the image data and the encoded message) back into a PNG image
+#Original function is commented out and png will be replaced with image
+#def write_pixels_to_image(pixels, imageFilename): #TODO: TEST
+#    png.from_array(pixels, 'RGB').save(imageFilename)
+
 def write_pixels_to_image(pixels, imageFilename): #TODO: TEST
-    png.from_array(pixels, 'RGB').save(imageFilename)
+   image = Image.new('RGB', (len(pixels[0]), len(pixels)))
+   image.putdata([tuple(p) for p in pixels])
+
+   return image.save(imageFilename, format='PNG')
 
 #converts a binary string back into human readable text
 def decode_message_from_bytestring(bytestring): #TESTED

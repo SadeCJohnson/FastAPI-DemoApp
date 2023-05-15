@@ -3,11 +3,47 @@ from fastapi import FastAPI
 from fastapi.responses import FileResponse
 import png
 import json
+from steganography import *
 from PIL import Image 
 
 ENDOFMESSAGE = "0100100101010101010101100100111101010010010001010011100101000111010101000101010101010110010101000101010100110000010001100100100001010010010100110100010100111101"
 
 program = FastAPI()
+
+
+#TESTING THE INTERACTIVITY OF THE APP
+
+def main():
+    print(PROMPT)
+    user_inp = ""
+    while user_inp not in ("1", "2", "q"):
+        user_inp = input("Your choice: ")
+
+    if user_inp == "1":
+        in_image = input("Please enter filename of existing PNG image: ")
+        in_message = input("Please enter the message to encode: ")
+
+        print("-ENCODING-")
+        pixels = get_pixels_from_image(in_image)
+        epixels = encode_pixels_with_message(pixels, bytestring)
+        write_pixels_to_image(epixels, in_image + "-enc.png")
+
+    elif user_inp == "2":
+        in_image = input("Please enter the filename of an existing PNG image: ")
+        print("-DECODING-")
+        pixels = get_pixels_from_image(in_image)
+        print(decode_pixels(pixels))
+
+if __name__ == "__main__":
+    main()
+
+
+
+
+
+
+
+
 
 #This code is from the exercise found here: https://docs.replit.com/tutorials/python/steganography
 
@@ -64,13 +100,28 @@ def retrieve_resized_image():
     return FileResponse("images/scj-avatar-resized.png")
 
 @program.get("/displaySteganographicImage")
-def display_Steganographic_Image():
-    return "Endpoint Under Construction - COMING SOON"
+def display_Steganographic_Image(bytestring):
+   image = Image.open("/Users/sjohnson/Desktop/techie-projects/FastAPI-DemoApp/program-files/images/scj-avatar.png")
+    
+    #resize image for ease
+   resized_image = image.resize((100,100))
+   resized_image.save("scj-unencoded-pic.png")
+   pixels = list(resized_image.getdata())
+    
+   write_pixels_to_image(encode_pixels_with_message(pixels, bytestring),"scj-encoded-pic.png")
+   
+   return FileResponse("scj-encoded-pic.png")
+
+   #write_pixels_to_image(encode_message_as_bytestring(pixels,bytestring), scj-encoded.png) 
 
 
-@program.get("/displaySteganographicImage-2")
-def displaySteganographicImage():
-    return "Improper format"
+    #return "Endpoint Under Construction - COMING SOON"
+
+
+#This function was created for naming convention testing purposes
+#@program.get("/displaySteganographicImage-2")
+#def displaySteganographicImage():
+#    return "Improper format"
 # ***************INPUT 1******************
 # http://127.0.0.1:8000/encodeMessage?message=%22Sade%22
 
