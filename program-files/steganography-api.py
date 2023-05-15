@@ -1,5 +1,6 @@
 import base64 #base64 uses 64 possible values for representing binary data (https://levelup.gitconnected.com/an-introduction-to-base64-encoding-716cdccc58ce)
-from fastapi import FastAPI
+from fastapi import FastAPI, Query
+from typing import Annotated #Not sure if this is needed yet... need to do more research
 from fastapi.responses import FileResponse
 import png
 import json
@@ -11,37 +12,33 @@ ENDOFMESSAGE = "0100100101010101010101100100111101010010010001010011100101000111
 program = FastAPI()
 
 
-#TESTING THE INTERACTIVITY OF THE APP
+#TESTING THE INTERACTIVITY OF THE APP - Not yet implemented
 
-def main():
-    print(PROMPT)
-    user_inp = ""
-    while user_inp not in ("1", "2", "q"):
-        user_inp = input("Your choice: ")
+#def main():
+ #   print(PROMPT)
+  #  user_inp = ""
+   # while user_inp not in ("1", "2", "q"):
+    #    user_inp = input("Your choice: ")
 
-    if user_inp == "1":
-        in_image = input("Please enter filename of existing PNG image: ")
-        in_message = input("Please enter the message to encode: ")
+    #if user_inp == "1":
+     #   in_image = input("Please enter filename of existing PNG image: ")
+       # in_message = input("Please enter the message to encode: ")
 
-        print("-ENCODING-")
-        pixels = get_pixels_from_image(in_image)
-        epixels = encode_pixels_with_message(pixels, bytestring)
-        write_pixels_to_image(epixels, in_image + "-enc.png")
+        #print("-ENCODING-")
+        #pixels = get_pixels_from_image(in_image)
+        #epixels = encode_pixels_with_message(pixels, bytestring)
+        #write_pixels_to_image(epixels, in_image + "-enc.png")
 
-    elif user_inp == "2":
-        in_image = input("Please enter the filename of an existing PNG image: ")
-        print("-DECODING-")
-        pixels = get_pixels_from_image(in_image)
-        print(decode_pixels(pixels))
+    #elif user_inp == "2":
+     #   in_image = input("Please enter the filename of an existing PNG image: ")
+      #  print("-DECODING-")
+       # pixels = get_pixels_from_image(in_image)
+        #print(decode_pixels(pixels))
 
-if __name__ == "__main__":
-    main()
+#if __name__ == "__main__":
+ #   main()
 
-
-
-
-
-
+# ---------------------------Actual Code starts below---------------------------------
 
 
 
@@ -117,6 +114,9 @@ def display_Steganographic_Image(bytestring):
 
     #return "Endpoint Under Construction - COMING SOON"
 
+
+@program.get("/decodeSteganographicMessage")
+def decode_steganographic_message():
 
 #This function was created for naming convention testing purposes
 #@program.get("/displaySteganographicImage-2")
