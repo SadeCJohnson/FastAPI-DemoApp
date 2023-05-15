@@ -44,12 +44,18 @@ program = FastAPI()
 
 #This code is from the exercise found here: https://docs.replit.com/tutorials/python/steganography
 
+#TODO: FIX
 #Will need to use a Query parameter to pass in value or else a 422 Unprocessable Entity error will be returned
 @program.get("/encodeMessage") 
 def encode_message_as_bytestring(message): #Query param format: ?message="<Insert-String-Here"
-    b64 = message.encode("utf8") #Unicode Transformation Format - 8 bits (UTF-8) encodes the characters as ASCII text aka in human readable / natural form
-    bytes_ = base64.encodebytes(b64) #encodes the message using base64 encoded data into the binary form
-    bytestring = "".join(["{:08b}".format(x) for x in bytes_]) #Tranformation of the binary form into a sequence of bytes (which allows the data to be stored in a computer)
+    if (message.isalpha())
+    try:
+        b64 = message.encode("utf8") #Unicode Transformation Format - 8 bits (UTF-8) encodes the characters as ASCII text aka in human readable / natural form
+        bytes_ = base64.encodebytes(b64) #encodes the message using base64 encoded data into the binary form
+        bytestring = "".join(["{:08b}".format(x) for x in bytes_]) #Tranformation of the binary form into a sequence of bytes (which allows the data to be stored in a computer)
+        break
+    except TypeError:
+        print("Sorry, but this function only takes alphabetic strings as input! Please enter a character between the letters a through z.")
     return bytestring
 
 @program.get("/decodeMessage") #Query param format http://127.0.0.1:8000/decodeMessage?bytestring=<Insert-bytestring-without-quotations>
@@ -115,8 +121,8 @@ def display_Steganographic_Image(bytestring):
     #return "Endpoint Under Construction - COMING SOON"
 
 
-@program.get("/decodeSteganographicMessage")
-def decode_steganographic_message():
+#@program.get("/decodeSteganographicMessage")
+#def decode_steganographic_message(): TODO
 
 #This function was created for naming convention testing purposes
 #@program.get("/displaySteganographicImage-2")
@@ -124,7 +130,3 @@ def decode_steganographic_message():
 #    return "Improper format"
 # ***************INPUT 1******************
 # http://127.0.0.1:8000/encodeMessage?message=%22Sade%22
-
-
-#  ***************OUTPUT 1****************
-# "010010010110110001001110011010000101101001000111010101010110100100001010"
