@@ -48,15 +48,18 @@ program = FastAPI()
 #Will need to use a Query parameter to pass in value or else a 422 Unprocessable Entity error will be returned
 @program.get("/encodeMessage") 
 def encode_message_as_bytestring(message): #Query param format: ?message="<Insert-String-Here"
-    if (message.isalpha())
-    try:
-        b64 = message.encode("utf8") #Unicode Transformation Format - 8 bits (UTF-8) encodes the characters as ASCII text aka in human readable / natural form
-        bytes_ = base64.encodebytes(b64) #encodes the message using base64 encoded data into the binary form
-        bytestring = "".join(["{:08b}".format(x) for x in bytes_]) #Tranformation of the binary form into a sequence of bytes (which allows the data to be stored in a computer)
-        break
-    except TypeError:
-        print("Sorry, but this function only takes alphabetic strings as input! Please enter a character between the letters a through z.")
-    return bytestring
+    if message.isalpha():
+      try:
+         b64 = message.encode("utf8") #Unicode Transformation Format - 8 bits (UTF-8) encodes the characters as ASCII text aka in human readable / natural form
+         bytes_ = base64.encodebytes(b64) #encodes the message using base64 encoded data into the binary form
+         bytestring = "".join(["{:08b}".format(x) for x in bytes_]) #Tranformation of the binary form into a sequence of bytes (which allows the data to be stored in a computer)
+         return bytestring
+
+      except TypeError:
+        return "Sorry, but this function only takes alphabetic strings as input! Please enter a character between the letters a through z."
+    else:
+        return "Sorry, but this function only takes alphabetic strings as input! Please enter a character between the letters a through z."
+
 
 @program.get("/decodeMessage") #Query param format http://127.0.0.1:8000/decodeMessage?bytestring=<Insert-bytestring-without-quotations>
 def decode_message_from_bytestring(bytestring): 
