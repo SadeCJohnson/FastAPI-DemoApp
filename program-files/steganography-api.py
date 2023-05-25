@@ -5,6 +5,7 @@ from fastapi.responses import FileResponse
 import png
 import json
 from steganography import *
+import asyncio
 from PIL import Image 
 
 ENDOFMESSAGE = "0100100101010101010101100100111101010010010001010011100101000111010101000101010101010110010101000101010100110000010001100100100001010010010100110100010100111101"
@@ -56,9 +57,9 @@ def encode_message_as_bytestring(message): #Query param format: ?message="<Inser
          return bytestring
 
       except TypeError:
-        return "Sorry, but this function only takes alphabetic strings as input! Please enter a character between the letters a through z."
+        raise TypeError("Sorry, but this function only takes alphabetic strings as input! Please enter a character between the letters a through z.")
     else:
-        return "Sorry, but this function only takes alphabetic strings as input! Please enter a character between the letters a through z."
+        raise TypeError("Sorry, but this function only takes alphabetic strings as input! Please enter a character between the letters a through z.")
 
 
 @program.get("/decodeMessage") #Query param format http://127.0.0.1:8000/decodeMessage?bytestring=<Insert-bytestring-without-quotations>
@@ -74,11 +75,11 @@ def decode_message_from_bytestring(bytestring):
 def displays_the_original_image():
     return FileResponse("images/scj-avatar.png")
 
-
+#Original Definition
 @program.get("/retrieveImagePixels")
 def retrieve_pixels_from_image():
-    #image = Image.open("/Users/sjohnson/Desktop/techie-projects/FastAPI-DemoApp/program-files/images/scj-avatar.png")
-    #pixels = list(image.getdata())
+    image = Image.open("/Users/sjohnson/Desktop/techie-projects/FastAPI-DemoApp/program-files/images/scj-avatar.png")
+   # pixels = list(image.getdata())
     #return pixels
 
     image = Image.open("/Users/sjohnson/Desktop/techie-projects/FastAPI-DemoApp/program-files/images/scj-avatar.png")
@@ -88,9 +89,18 @@ def retrieve_pixels_from_image():
     resized_image = image.resize(new_size)
     resized_image.save("newimage.png")
     pixels = list(resized_image.getdata())
-    
-    print(pixels)
+   # pixels = list(image)
     return pixels
+#    return get_pixels_from_image(image)     
+#Asynchronous Solution
+@program.get("/retrieveImagePixels-async")
+async def retrieve_pixels_from_image_async():
+    image ="/Users/sjohnson/Desktop/techie-projects/FastAPI-DemoApp/program-files/images/scj-avatar.png"
+    loop = asyncio.get_running_loop()
+    image = await loop.run_in_executor(None, Image.open, image)
+    pixels = await loop.run_in_executor(None, list, image.getdata())
+    return pixels
+
 
 @program.get("/displayResizedImage")
 def retrieve_resized_image():
