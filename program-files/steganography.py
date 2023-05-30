@@ -88,4 +88,3 @@ def decode_pixels(pixels): #TODO: TEST
     message = decode_message_from_bytestring(bytestring)
     return message
 
-

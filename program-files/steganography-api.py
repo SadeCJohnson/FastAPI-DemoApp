@@ -82,7 +82,7 @@ def retrieve_pixels_from_image():
    # pixels = list(image.getdata())
     #return pixels
 
-    image = Image.open("/Users/sjohnson/Desktop/techie-projects/FastAPI-DemoApp/program-files/images/scj-avatar.png")
+   # image = Image.open("/Users/sjohnson/Desktop/techie-projects/FastAPI-DemoApp/program-files/images/scj-avatar.png")
     
     #resize image for ease
     new_size = (100,100)

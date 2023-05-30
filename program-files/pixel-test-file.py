@@ -64,9 +64,11 @@ def encode_pixels_with_message(pixels, bytestring):
 
 
 
+
+
 print("Retrieving pixels from an image: ")
 retrieve_pixels_from_image()
-print("Encoding pixels with a message: ")
+print("Encoding pixels with a bytestring message: ")
 encode_pixels_with_message(retrieve_pixels_from_image(), "010101010011001001000110011010110101101001010001001111010011110100001010")
 
 #print("Writing pixels to the modified image: ")
